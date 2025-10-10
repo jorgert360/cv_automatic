@@ -1,0 +1,20 @@
+Cargo: Analista de Datos
+
+Empresa: TechSolutions S.A.S
+
+Descripción:
+Buscamos un Analista de Datos con habilidades en análisis de información, manejo de bases de datos y herramientas de visualización. La persona ideal debe ser proactiva, organizada y tener excelentes capacidades analíticas para apoyar la toma de decisiones estratégicas de la compañía.
+
+Requisitos:
+- Profesional en Ingeniería, Estadística, Economía o carreras afines.
+- Experiencia mínima de 2 años en análisis de datos.
+- Conocimientos intermedios en Excel.
+- Dominio de herramientas de visualización como Power BI o Tableau.
+- Manejo de indicadores de gestión y elaboración de reportes ejecutivos.
+- Capacidad para identificar oportunidades de mejora en los procesos.
+- Se valorará experiencia en Python y bases de datos SQL.
+
+Ofrecemos:
+- Contrato a término indefinido.
+- Salario competitivo.
+- Oportunidades de crecimiento profesional.

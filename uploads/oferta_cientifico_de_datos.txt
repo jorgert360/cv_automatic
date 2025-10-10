@@ -1,0 +1,50 @@
+Acerca del empleo
+ROL: Definir, asesorar, coordinar y/o ejecutar con visión integral las actividades del proyecto/servicio, desarrollando productos de complejidad avanzada, con calidad y de acuerdo a los tiempos asignados, a través de la correcta implementación de la solución
+
+
+FORMACIÓN
+
+Profesional en Ingeniería, Estadística y/o Matemáticas con conocimiento EXPERTO en Machine Learning. Manejo de software R, Python, Scala. (Se requiere tarjeta profesional).
+Formación reciente asociada a implementación de IA/IA Generativa (LLM): certificaciones o cursos en Azure AI/Azure OpenAI (p. ej., AI‑102), Google Cloud Generative AI/Vertex AI, AWS Bedrock, Databricks Generative AI, Prompt Engineering, RAG y Responsible AI. Se valoran credenciales verificables (badges) y portafolio (GitHub/notebooks).
+Complementario: seguridad y gobierno de datos (PII/PHI, cumplimiento), metodologías ágiles (Scrum/Kanban) y buenas prácticas de MLOps/LLMOps.
+EXPERIENCIA
+
+Mínima de 3 años implementando modelos analíticos.
+Experiencia demostrable en el ciclo end to end desde la exploración hasta la producción del modelo.
+Analizar e interpretar datos cualitativos y cuantitativos usando métodos estadísticos existentes.
+Amplia experiencia y alto nivel de conocimiento en ML (regresión logística, árboles de decisión, series de tiempo, clusterización, entre otros).
+Conocimiento en IA tales como:
+o NLP
+o Visión por computador
+o Entre otros
+Adicional (GenAI/LLM):
+Participación en proyectos con IA Generativa/LLM o, en su defecto, conocimiento comprobable (casos de uso, PoC/prototipos o entregables verificables).
+Diseño y evaluación de prompts; ajuste fino cuando aplique; evaluación de calidad (factualidad, seguridad, utilidad, toxicidad).
+Implementación de patrones como RAG, asistentes y búsqueda aumentada; integración con APIs y servicios cloud (Azure OpenAI/OpenAI API, Google Vertex AI, AWS Bedrock).
+Uso de búsqueda semántica y bases vectoriales (Pinecone, FAISS, Chroma, Azure AI Search/Elasticsearch).
+Desarrollo en Python/SQL; construcción de servicios (p. ej., FastAPI), contenedores (Docker), control de versiones (Git) y prácticas de MLOps/LLMOps (MLflow, Weights & Biases, evaluación continua, monitoreo de calidad, costos y latencia).
+DESEABLE
+
+Servicios de ML e IA en alguna de las nubes (Azure, AWS, GCP).
+Implementación en producción de soluciones con LLM (RAG, asistentes, generación/síntesis de conocimiento) con guardrails, mitigación de alucinaciones y controles de privacidad/seguridad.
+Prácticas de LLMOps: datasets de evaluación, trazabilidad de prompts, monitoreo de calidad/costos/drift y A/B testing.
+Estudios/certificaciones recientes asociados a la implementación de IA/IA generativa.
+Contribuciones públicas: estudios de caso, publicaciones técnicas, charlas o proyectos open source.
+Inglés intermedio/avanzado para documentación técnica y coordinación con proveedores
+Responsabilidades funcionales:
+
+Ejecución end-to-end de soluciones de datos/ML/GenAI: discovery, set-up, planeación, ejecución, validación, preparación final y liberación a producción.
+Diseñar y desarrollar modelos analíticos (regresión, árboles, series de tiempo, clustering, NLP, visión) y soluciones con LLM (RAG, asistentes, búsqueda semántica, chat interno), incluyendo diseño/evaluación de prompts y, cuando aplique, ajuste fino.
+Asegurar prácticas de ingeniería y MLOps/LLMOps: versionamiento, experiment tracking, evaluación continua, monitoreo de calidad/costos/latencia, observabilidad y documentación.
+Garantizar gobierno, seguridad y privacidad de datos; implementar guardrails y principios de Responsible AI.
+Resolver problemas complejos y proponer soluciones innovadoras; trabajar de forma autónoma.
+Responsabilidades de gestión:
+
+Realizar levantamiento de requerimientos y definir la propuesta de solución; dimensionar esfuerzos en preventa según complejidad.
+Conducir workshops, priorizar backlog y alinear roadmap de valor.
+Generar casos de éxito, whitepapers y contribuir a la Base de Conocimientos (mejores prácticas, solución a errores).
+Impartir cursos/charlas y actuar como mentor de carrera.
+
+
+Hibrido en Bogotá
+Contrato a término indefinido + beneficios

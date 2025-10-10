@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de tu Optimización</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1c2541, #3a506b); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px 20px; box-sizing: border-box; }
+        .card { background-color: white; padding: 40px 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-width: 900px; width: 100%; display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: center; }
+        .recruiter-img { width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        h1 { color: #1c2541; font-weight: 700; font-size: 28px; margin-top: 0; margin-bottom: 10px; }
+        .subtitle { color: #5b6a7e; margin-bottom: 30px; line-height: 1.6; }
+        .feedback-list { list-style: none; padding-left: 0; }
+        .feedback-list li { background-color: #f1f4fd; padding: 15px; border-radius: 10px; margin-bottom: 12px; color: #333; border-left: 5px solid #5e7ce2; text-align: left; }
+        
+        /* --- ESTILOS DE BOTONES MODIFICADOS --- */
+        .buttons {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr; /* Apila los botones verticalmente */
+            gap: 15px;
+        }
+        
+        .btn { display: block; text-decoration: none; color: white; border: none; padding: 16px 20px; font-size: 16px; font-weight: 600; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+        .btn-download { background: linear-gradient(90deg, #2ecc71, #27ae60); box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); }
+        
+        .btn-donate {
+            background: linear-gradient(90deg, #8E44AD, #9B59B6); /* Nuevo color púrpura */
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4);
+        }
+        
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(0,0,0,0.2); }
+        @media (max-width: 768px) { .card { grid-template-columns: 1fr; text-align: center; } .recruiter-img { max-width: 150px; margin: 0 auto 20px; } .buttons { grid-template-columns: 1fr; } .feedback-list li { text-align: left; } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="recruiter-column">
+            <img src="{{ url_for('static', filename='reclutadora_señalando.jpg') }}" alt="Asesora Profesional de IA" class="recruiter-img">
+        </div>
+        <div class="content-column">
+            <h1>Análisis Completado</h1>
+            <p class="subtitle">Tu CV ha sido optimizado. Aquí tienes una retroalimentación estratégica para destacarte aún más en tu proceso de selección.</p>
+            <ul class="feedback-list">
+                {% for consejo in retro %}
+                    <li>{{ consejo }}</li>
+                {% else %}
+                    <li>No se pudo generar la retroalimentación en este momento.</li>
+                {% endfor %}
+            </ul>
+            <div class="buttons">
+                <a href="{{ url_for('descargar', filename=filename) }}" class="btn btn-download">⬇️ Descargar CV Optimizado</a>
+                <a href="{{ url_for('donar') }}" class="btn btn-donate">💜 Apoya este proyecto con una donación</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Pro AI - Optimizador Inteligente de CV</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1c2541, #3a506b); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { background-color: white; padding: 40px 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-width: 650px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .header-section { display: flex; align-items: center; gap: 30px; margin-bottom: 20px; width: 100%; }
+        .header-image { flex-shrink: 0; }
+        .main-image { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+        .header-text { text-align: left; }
+        h1 { color: #1c2541; font-weight: 700; font-size: 32px; margin: 0 0 10px 0; line-height: 1.2; }
+        p { color: #5b6a7e; margin: 0; line-height: 1.6; }
+        label { display: block; margin: 25px 0 8px 0; font-weight: 600; color: #3a506b; text-align: left; width: 100%; }
+        input[type="file"] { width: 100%; padding: 15px; border: 1px solid #dbe2f0; border-radius: 10px; background-color: #f8f9fa; color: #5b6a7e; transition: all 0.2s ease; box-sizing: border-box; font-family: 'Inter', sans-serif; font-size: 14px; cursor: pointer; }
+        input[type="file"]::file-selector-button { display: none; }
+        input[type="file"]:hover { border-color: #5e7ce2; background-color: #f1f4fd; outline: none; }
+        button { background: linear-gradient(90deg, #5e7ce2, #475fbd); color: white; border: none; padding: 16px 30px; font-size: 18px; font-weight: 600; border-radius: 10px; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(94, 124, 226, 0.3); margin-top: 10px; }
+        button:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(94, 124, 226, 0.4); }
+        button:disabled { background: #bdc3c7; cursor: not-allowed; box-shadow: none; transform: none; }
+        .flash-messages li { background-color: #e74c3c; color: white; padding: 12px; border-radius: 8px; list-style: none; margin: 20px 0 0 0; }
+        #loader { display: none; }
+        .spinner { border: 8px solid #f3f3f3; border-top: 8px solid #5e7ce2; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* --- 2. ESTILOS PARA LA CASILLA DE HABEAS DATA --- */
+        .habeas-data {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #5b6a7e;
+        }
+        .habeas-data input[type="checkbox"] {
+            width: auto; /* Anula el estilo general de inputs */
+            margin: 0;
+            cursor: pointer;
+        }
+        .habeas-data label {
+            margin: 0; /* Anula el estilo general de labels */
+            text-align: left;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .g-recaptcha { display: inline-block; margin-top: 20px; }
+        
+        @media (max-width: 600px) {
+            .header-section { flex-direction: column; text-align: center; }
+            .header-text { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div id="form-container" class="card">
+        <div class="header-section">
+            <div class="header-image"><img src="{{ url_for('static', filename='reclutadora.jpg') }}" alt="Reclutadora Profesional" class="main-image"></div>
+            <div class="header-text"><h1>No permitas que tu CV lo descarte un ATS</h1><p>Transforma tu CV y supera los filtros ATS con IA. Aumenta tu afinidad con la oferta laboral hasta el 100 % y consigue la entrevista que cambiará tu vida profesional.</p></div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}<ul class="flash-messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>{% endif %}
+        {% endwith %}
+        <form id="upload-form" action="/procesar" method="post" enctype="multipart/form-data">
+            <label for="cv_file">1. Tu Hoja de Vida (.pdf)</label>
+            <input type="file" id="cv_file" name="cv_file" accept=".pdf" required>
+            <label for="oferta_file">2. La Oferta Laboral (.pdf, .docx, .txt)</label>
+            <input type="file" id="oferta_file" name="oferta_file" accept=".pdf,.docx,.txt" required>
+            
+            <div class="habeas-data">
+                <input type="checkbox" id="habeas_data" name="habeas_data" required>
+                <label for="habeas_data">Acepto y autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012 de Colombia.</label>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="{{ site_key }}" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
+            <button type="submit" id="submit-button" disabled>Analizar y Optimizar mi CV</button>
+        </form>
+    </div>
+    <div id="loader" class="card">
+        <div class="spinner"></div><h2>Analizando con IA...</h2><p>Estamos preparando tu retroalimentación estratégica. Esto puede tardar hasta un minuto.</p>
+    </div>
+
+    <script>
+        // Lógica para el loader (se mantiene igual)
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('loader').style.display = 'flex';
+        });
+
+        // Lógica para habilitar el botón
+        let recaptchaValidado = false;
+        const habeasCheckbox = document.getElementById('habeas_data');
+        const submitButton = document.getElementById('submit-button');
+
+        function validarFormulario() {
+            const habeasAceptado = habeasCheckbox.checked;
+            if (recaptchaValidado && habeasAceptado) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        function onRecaptchaSuccess() {
+            recaptchaValidado = true;
+            validarFormulario();
+        }
+
+        function onRecaptchaExpired() {
+            recaptchaValidado = false;
+            validarFormulario();
+        }
+
+        // Agregamos un listener a la casilla para que valide cada vez que cambia
+        habeasCheckbox.addEventListener('change', validarFormulario);
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoya CV Pro AI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1c2541, #3a506b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            max-width: 800px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .text-content {
+            text-align: center;
+        }
+
+        .main-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        h1 {
+            color: #1c2541;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #5b6a7e;
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .qr-code {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #5e7ce2;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .card { grid-template-columns: 1fr; }
+            .text-content { text-align: center; }
+            .subtitle { text-align: center; }
+            .qr-code { max-width: 280px; margin: 20px auto 0 auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="text-content">
+            <img src="{{ url_for('static', filename='reclutadora_feliz.jpg') }}" alt="¡Gracias por tu apoyo!" class="main-image">
+
+            <h1>💜 ¡Gracias por tu Apoyo!</h1>
+            
+            <p class="subtitle">
+                Tu generosidad es el motor que impulsa este proyecto. Cada aporte me ayuda a mantener esta herramienta tecnológica, la cual ha facilitado a muchas personas alcanzar ese trabajo soñado.
+            </p>
+            <p class="subtitle">
+                Permíteme seguir avanzando en este sueño. O puedes contactarme al correo electrónico: <strong>jorge.ramtroz189@gmail.com</strong>
+            </p>
+            <a href="/" class="btn-back">← Volver al inicio</a>
+        </div>
+
+        <div class="qr-content">
+            <img src="{{ url_for('static', filename='codigo_qr.jpg') }}" alt="Código QR para donación en Nequi" class="qr-code">
+        </div>
+    </div>
+</body>
+</html>
