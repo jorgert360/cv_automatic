@@ -1,4 +1,4 @@
-# app.py (Versión segura para producción)
+# app.py (Versión segura para producción y adaptada a Railway)
 
 import os
 import requests
@@ -6,10 +6,11 @@ from flask import Flask, render_template, request, send_from_directory, flash, r
 from werkzeug.utils import secure_filename
 from logic import procesar_cv_completo, extraer_texto_pdf, extraer_texto_docx
 
-# --- CONFIGURACIÓN DE RUTAS ---
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-OUTPUT_FOLDER = os.path.join(BASE_DIR, 'outputs')
+# --- CONFIGURACIÓN DE RUTAS (ADAPTADA PARA RAILWAY) ---
+# Usamos /data, que es la ruta estándar para "Volumes" en Railway.
+VOLUME_PATH = "/data"  # <-- MODIFICADO----
+UPLOAD_FOLDER = os.path.join(VOLUME_PATH, 'uploads')  # <-- MODIFICADO
+OUTPUT_FOLDER = os.path.join(VOLUME_PATH, 'outputs')  # <-- MODIFICADO
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'docx'}
 
 app = Flask(__name__)
@@ -123,4 +124,6 @@ def donar():
     return render_template('donar.html')
 
 if __name__ == '__main__':
+    # Esta línea se ignora en producción cuando usas Gunicorn,
+    # pero permite correrlo localmente para pruebas si es necesario.
     app.run(debug=True)
