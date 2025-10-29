@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - CV Automatic</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Blog de Carrera</h1>
+        <p>Consejos y estrategias para tu desarrollo profesional.</p>
+        <hr>
+        <div class="list-group">
+            <a href="/blog/como-escribir-un-cv-perfecto" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Cómo Escribir un CV Perfecto en 2025</h5>
+                <small>28 de Octubre de 2025</small>
+                </div>
+                <p class="mb-1">Aprende las claves para que tu CV no solo pase los filtros ATS, sino que también impresione a los reclutadores.</p>
+            </a>
+            <!-- Aquí se pueden añadir más artículos dinámicamente -->
+        </div>
+        <hr>
+        <a href="{{ url_for('index') }}">Volver al inicio</a>
+    </div>
+    <footer style="text-align: center; color: black; margin-top: 20px;">
+        <p>
+            <a href="/about">Sobre Nosotros</a> |
+            <a href="/contact">Contacto</a> |
+            <a href="/privacy">Política de Privacidad</a>
+        </p>
+    </footer>
+</body>
+</html>

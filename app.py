@@ -123,6 +123,28 @@ def descargar(filename):
 def donar():
     return render_template('donar.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+@app.route('/blog/<article_name>')
+def article(article_name):
+    # In a real application, you would fetch the article from a database
+    # based on the article_name. For now, we just render the sample article.
+    return render_template('article.html')
+
 if __name__ == '__main__':
     # Esta línea se ignora en producción cuando usas Gunicorn,
     # pero permite correrlo localmente para pruebas si es necesario.
