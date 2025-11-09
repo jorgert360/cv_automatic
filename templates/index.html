@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Pro AI - Optimizador Inteligente de CV</title>
+    <title>CV Automatic - Optimizador Inteligente de CV</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
+        /* (Todo el CSS de index.html permanece igual...) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1c2541, #3a506b); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #1c2541, #3a506b); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
         .card { background-color: white; padding: 40px 50px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-width: 650px; width: 100%; display: flex; flex-direction: column; align-items: center; }
         .header-section { display: flex; align-items: center; gap: 30px; margin-bottom: 20px; width: 100%; }
         .header-image { flex-shrink: 0; }
@@ -28,7 +39,6 @@
         .spinner { border: 8px solid #f3f3f3; border-top: 8px solid #5e7ce2; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* --- 2. ESTILOS PARA LA CASILLA DE HABEAS DATA --- */
         .habeas-data {
             display: flex;
             align-items: center;
@@ -39,19 +49,43 @@
             color: #5b6a7e;
         }
         .habeas-data input[type="checkbox"] {
-            width: auto; /* Anula el estilo general de inputs */
+            width: auto; 
             margin: 0;
             cursor: pointer;
         }
         .habeas-data label {
-            margin: 0; /* Anula el estilo general de labels */
+            margin: 0; 
             text-align: left;
             font-weight: 400;
             cursor: pointer;
         }
-
+        .habeas-data a {
+            color: #5e7ce2; 
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .habeas-data a:hover {
+            color: #1c2541; 
+        }
         .g-recaptcha { display: inline-block; margin-top: 20px; }
-        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px; 
+            width: 100%;
+        }
+        .footer p {
+            margin: 0;
+            color: white;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 600px) {
             .header-section { flex-direction: column; text-align: center; }
             .header-text { text-align: center; }
@@ -75,7 +109,11 @@
             
             <div class="habeas-data">
                 <input type="checkbox" id="habeas_data" name="habeas_data" required>
-                <label for="habeas_data">Acepto y autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012 de Colombia.</label>
+                <label for="habeas_data">
+                    He leído y acepto la 
+                    <a href="{{ url_for('privacy') }}" target="_blank">Política de Privacidad</a> 
+                    y autorizo el tratamiento de mis datos personales.
+                </label>
             </div>
 
             <div class="g-recaptcha" data-sitekey="{{ site_key }}" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
@@ -86,18 +124,23 @@
         <div class="spinner"></div><h2>Analizando con IA...</h2><p>Estamos preparando tu retroalimentación estratégica. Esto puede tardar hasta un minuto.</p>
     </div>
 
+    <footer class="footer">
+        <p>
+            <a href="{{ url_for('blog') }}">Blog</a> |
+            <a href="{{ url_for('about') }}">Sobre Nosotros</a> |
+            <a href="{{ url_for('contact') }}">Contacto</a> |
+            <a href="{{ url_for('privacy') }}">Política de Privacidad</a>
+        </p>
+    </footer>
+
     <script>
-        // Lógica para el loader (se mantiene igual)
         document.getElementById('upload-form').addEventListener('submit', function() {
             document.getElementById('form-container').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
         });
-
-        // Lógica para habilitar el botón
         let recaptchaValidado = false;
         const habeasCheckbox = document.getElementById('habeas_data');
         const submitButton = document.getElementById('submit-button');
-
         function validarFormulario() {
             const habeasAceptado = habeasCheckbox.checked;
             if (recaptchaValidado && habeasAceptado) {
@@ -106,27 +149,15 @@
                 submitButton.disabled = true;
             }
         }
-
         function onRecaptchaSuccess() {
             recaptchaValidado = true;
             validarFormulario();
         }
-
         function onRecaptchaExpired() {
             recaptchaValidado = false;
             validarFormulario();
         }
-
-        // Agregamos un listener a la casilla para que valide cada vez que cambia
         habeasCheckbox.addEventListener('change', validarFormulario);
     </script>
-    <footer style="text-align: center; color: white; margin-top: 20px;">
-        <p>
-            <a href="/blog" style="color: white;">Blog</a> |
-            <a href="/about" style="color: white;">Sobre Nosotros</a> |
-            <a href="/contact" style="color: white;">Contacto</a> |
-            <a href="/privacy" style="color: white;">Política de Privacidad</a>
-        </p>
-    </footer>
 </body>
 </html>

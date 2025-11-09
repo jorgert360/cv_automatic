@@ -1,67 +1,142 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - CV Automatic</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Política de Privacidad</h1>
-        <p><strong>Última actualización:</strong> 28 de Octubre de 2025</p>
+{% extends "layout.html" %}
 
-        <p>
-            Bienvenido a CV Automatic. Tu privacidad es importante para nosotros. Esta Política de Privacidad explica cómo
-            recopilamos, usamos, divulgamos y protegemos tu información cuando visitas nuestro sitio web.
-        </p>
+{% block title %}Política de Privacidad - CV Automatic{% endblock %}
 
-        <h2>1. Información que Recopilamos</h2>
-        <p>
-            Recopilamos información que nos proporcionas directamente, como cuando subes tu CV y una oferta de trabajo.
-            Los documentos que subes se utilizan únicamente para el propósito de optimizar tu CV y no se comparten con
-            terceros. Los archivos se almacenan de forma temporal y segura en nuestros servidores y se eliminan
-            periódicamente.
-        </p>
+{% block content %}
+    <h1>Política de Privacidad</h1>
+    <p><strong>Última actualización:</strong> 28 de octubre de 2025</p>
 
-        <h2>2. Uso de la Información</h2>
-        <p>
-            La información que recopilamos se utiliza para:
-            <ul>
-                <li>Proveer, operar y mantener nuestro servicio.</li>
-                <li>Mejorar, personalizar y expandir nuestro servicio.</li>
-                <li>Entender y analizar cómo utilizas nuestro servicio.</li>
-                <li>Procesar tu solicitud y enviarte el CV optimizado.</li>
-            </ul>
-        </p>
+    <p>
+        Bienvenido a CV Automatic (“nosotros”, “nuestro” o “el Sitio Web”). Tu privacidad
+        es muy importante para nosotros. Esta Política de Privacidad describe cómo
+        recopilamos, usamos, almacenamos y protegemos tu información personal cuando
+        utilizas nuestro sitio web o nuestros servicios.
+    </p>
+    <p>
+        Al acceder o utilizar CV Automatic, aceptas las prácticas descritas en esta
+        Política. Si no estás de acuerdo con alguna de las condiciones aquí
+        establecidas, te recomendamos no utilizar nuestros servicios.
+    </p>
 
-        <h2>3. Cookies y Tecnologías de Rastreo</h2>
-        <p>
-            Utilizamos cookies para mantener la sesión y para el funcionamiento de servicios de terceros como Google
-            reCAPTCHA y, en el futuro, Google AdSense. Puedes instruir a tu navegador para que rechace todas las cookies
-            o para que te avise cuándo se envía una cookie.
-        </p>
+    <h2>1. Información que Recopilamos</h2>
+    <p>Recopilamos los siguientes tipos de información:</p>
+    
+    <p style="margin-bottom: 5px;"><strong>a. Información proporcionada directamente por el usuario</strong></p>
+    <p>Recopilamos los datos que nos facilitas voluntariamente, como:</p>
+    <ul>
+        <li>Tu nombre y correo electrónico (si los proporcionas).</li>
+        <li>Los documentos que subes (por ejemplo, tu CV o una oferta de empleo).</li>
+    </ul>
+    <p>
+        Los archivos cargados se utilizan únicamente para procesar y optimizar tu
+        hoja de vida.
+    </p>
+    <p>
+        Estos documentos se almacenan de forma temporal y segura y se eliminan
+        periódicamente de nuestros servidores una vez completado el proceso.
+    </p>
 
-        <h2>4. Google AdSense</h2>
-        <p>
-            Este sitio web tiene la intención de utilizar Google AdSense para mostrar anuncios. Google utiliza cookies
-            para mostrar anuncios relevantes basados en las visitas anteriores de un usuario a este u otros sitios web.
-            Los usuarios pueden inhabilitar la publicidad personalizada visitando la página de <a href="https://www.google.com/settings/ads">Configuración de anuncios de Google</a>.
-        </p>
-        
-        <h2>5. Seguridad de la Información</h2>
-        <p>
-            Tomamos medidas razonables para proteger la información que nos proporcionas. Sin embargo, ningún sistema
-            de seguridad es impenetrable y no podemos garantizar la seguridad absoluta de tu información.
-        </p>
+    <p style="margin-bottom: 5px;"><strong>b. Información recopilada automáticamente</strong></p>
+    <p>Podemos recopilar cierta información técnica cuando visitas nuestro sitio, como:</p>
+    <ul>
+        <li>Dirección IP, tipo de navegador, sistema operativo y páginas visitadas.</li>
+        <li>Fecha y hora de acceso.</li>
+    </ul>
+    <p>Esta información se usa de forma agregada para mejorar el rendimiento y la seguridad del sitio.</p>
 
-        <h2>6. Contacto</h2>
-        <p>
-            Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos a través de nuestra
-            página de contacto.
-        </p>
-        <hr>
-        <a href="{{ url_for('index') }}">Volver al inicio</a>
-    </div>
-</body>
-</html>
+    <h2>2. Uso de la Información</h2>
+    <p>La información recopilada se utiliza para los siguientes fines:</p>
+    <ul>
+        <li>Proveer, operar y mantener nuestro servicio.</li>
+        <li>Optimizar y personalizar tu experiencia en la plataforma.</li>
+        <li>Analizar cómo utilizas el servicio para mejorar su funcionamiento.</li>
+        <li>Procesar tu solicitud y enviarte tu CV optimizado.</li>
+        <li>Cumplir con obligaciones legales o de seguridad cuando sea necesario.</li>
+    </ul>
+
+    <h2>3. Cookies y Tecnologías de Rastreo</h2>
+    <p>Nuestro sitio utiliza cookies y tecnologías similares para:</p>
+    <ul>
+        <li>Mantener la sesión del usuario activa.</li>
+        <li>Recordar tus preferencias.</li>
+        <li>
+            Permitir el funcionamiento de servicios de terceros, como Google reCAPTCHA para la
+            verificación de seguridad y, próximamente, Google AdSense para la
+            gestión de anuncios.
+        </li>
+    </ul>
+    <p>
+        Puedes configurar tu navegador para rechazar todas las cookies o para recibir un aviso
+        cuando se envíe una cookie. Sin embargo, algunas partes del sitio podrían no
+        funcionar correctamente si lo haces.
+    </p>
+
+    <h2>4. Google AdSense y Publicidad Personalizada</h2>
+    <p>Este sitio tiene la intención de utilizar Google AdSense para mostrar anuncios relevantes.</p>
+    <p>
+        Google utiliza cookies y otras tecnologías para mostrar publicidad basada en
+        tus intereses y visitas anteriores a este u otros sitios web.
+    </p>
+    <p>
+        Puedes inhabilitar la publicidad personalizada visitando la 
+        <a href="https://www.google.com/settings/ads" target="_blank">Configuración de anuncios de Google</a> 
+        o consultando la Política de privacidad de Google.
+    </p>
+
+    <h2>5. Seguridad de la Información</h2>
+    <p>
+        Implementamos medidas técnicas, administrativas y físicas razonables para proteger tu
+        información frente a accesos no autorizados, pérdida o alteración.
+    </p>
+    <p>
+        Sin embargo, ningún sistema es completamente seguro y no podemos garantizar la
+        protección absoluta de los datos transmitidos por Internet.
+    </p>
+
+    <h2>6. Retención y Eliminación de Datos</h2>
+    <p>
+        Los archivos y datos personales que nos proporcionas se conservan únicamente
+        durante el tiempo necesario para cumplir con el propósito para el cual fueron
+        recopilados.
+    </p>
+    <p>
+        Una vez procesado tu CV, los documentos se eliminan automáticamente de
+        nuestros servidores de forma segura.
+    </p>
+
+    <h2>7. Derechos del Usuario</h2>
+    <p>De acuerdo con las normativas de protección de datos aplicables, tienes derecho a:</p>
+    <ul>
+        <li>Acceder a tus datos personales.</li>
+        <li>Solicitar su corrección o eliminación.</li>
+        <li>Retirar tu consentimiento en cualquier momento.</li>
+        <li>Solicitar información sobre cómo se manejan tus datos.</li>
+    </ul>
+    <p>Para ejercer cualquiera de estos derechos, contáctanos a través del correo indicado al final de esta política.</p>
+
+    <h2>8. Enlaces a Terceros</h2>
+    <p>
+        Nuestro sitio puede contener enlaces a sitios web externos. No somos responsables del
+        contenido ni de las prácticas de privacidad de dichos sitios. Te recomendamos
+        revisar sus políticas de privacidad antes de proporcionar cualquier información
+        personal.
+    </p>
+
+    <h2>9. Cambios a Esta Política</h2>
+    <p>Podemos actualizar esta Política de Privacidad periódicamente.</p>
+    <p>La fecha de la última actualización se indicará al inicio de este documento.</p>
+    <p>
+        Te recomendamos revisar esta página con regularidad para mantenerte informado
+        sobre cómo protegemos tu información.
+    </p>
+
+    <h2>10. Contacto</h2>
+    <p>
+        Si tienes preguntas, solicitudes o inquietudes sobre esta Política de Privacidad, puedes
+        comunicarte con nosotros al siguiente correo electrónico:
+    </p>
+    <p>
+        <strong>soporte@cvautomatic.com</strong>
+    </p>
+
+{% endblock %}

@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - CV Automatic</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Contacto</h1>
-        <p>
-            Si tienes preguntas, sugerencias o necesitas soporte, no dudes in contactarnos.
-        </p>
-        <p>
-            Puedes enviarnos un correo electrónico a: <strong>soporte@cvautomatic.example.com</strong> (reemplaza esto con tu email real).
-        </p>
-        <p>
-            Agradecemos tus comentarios para seguir mejorando nuestra herramienta.
-        </p>
-        <hr>
-        <a href="{{ url_for('index') }}">Volver al inicio</a>
+{% extends "layout.html" %}
+
+{% block title %}Contacto - CV Pro AI{% endblock %}
+
+{% block content %}
+    <h1>Contacto</h1>
+    <p>
+        Si tienes preguntas, sugerencias o necesitas soporte, no dudes in contactarnos.
+    </p>
+    <p>
+        Puedes enviarnos un correo electrónico a: <strong>soporte@tu-dominio.com</strong> (reemplaza esto con tu email real).
+    </p>
+    <p>
+        Agradecemos tus comentarios para seguir mejorando nuestra herramienta.
+    </p>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+    
+    <div style="text-align: center; margin-top: 10px;">
+        <img src="{{ url_for('static', filename='imagen_contacto.jpg') }}" 
+             alt="Imagen de Contacto" 
+             style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
     </div>
-</body>
-</html>
+    
+    {% endblock %}

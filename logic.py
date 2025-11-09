@@ -1,4 +1,4 @@
-# logic.py (Versión final que interpreta la estructura completa de la IA)
+# logic.py (Versión con límite de tokens para CV)
 
 import os
 import re
@@ -36,7 +36,12 @@ def extraer_texto_docx(ruta_docx):
 
 def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
     print("🤖 Analizando y optimizando el CV con IA...")
+    
+    # Modelo que sabemos que funciona para tu API/biblioteca
     model = genai.GenerativeModel("models/gemini-2.5-pro")
+    
+    print(f"DEBUG: Intentando usar el modelo: {model.model_name}")
+
     prompt = f"""
     Actúa como una experta en reclutamiento de alta gerencia y coach de carrera.
     Analiza el CV y la oferta de trabajo.
@@ -107,21 +112,18 @@ def crear_docx_optimizado(ruta_completa_salida, data):
     
     doc.add_heading('Habilidades', level=1)
     habilidades = cv.get('habilidades') or {}
-    # --- LÓGICA CORREGIDA PARA HABILIDADES ---
     for key, title in habilidades.items():
         if title and isinstance(title, list):
             p_hab = doc.add_paragraph()
-            # Formateamos el nombre de la categoría, ej: "tecnicas_y_analiticas" -> "Tecnicas y Analiticas"
             p_hab.add_run(key.replace('_', ' ').replace('-', ' ').title() + ': ').bold = True
             p_hab.add_run(", ".join(title))
 
     doc.add_heading('Idiomas', level=1)
-    # --- LÓGICA CORREGIDA PARA IDIOMAS ---
     for idioma_info in cv.get('idiomas') or []:
         if isinstance(idioma_info, dict):
             texto_idioma = f"{idioma_info.get('idioma', '')}: {idioma_info.get('nivel', '')}"
             doc.add_paragraph(texto_idioma)
-        else: # Por si acaso devuelve una lista de strings
+        else:
             doc.add_paragraph(idioma_info)
 
     doc.save(ruta_completa_salida)
@@ -130,12 +132,25 @@ def crear_docx_optimizado(ruta_completa_salida, data):
 def procesar_cv_completo(ruta_pdf_cv, texto_oferta, output_folder):
     configurar_gemini()
     texto_cv = extraer_texto_pdf(ruta_pdf_cv)
+
+    # --- INICIO DE LA MODIFICACIÓN (LÍMITE DE TOKENS CV) ---
+    MAX_CARACTERES_CV = 15000 # Aprox. 5 páginas
+    
+    if len(texto_cv) > MAX_CARACTERES_CV:
+        print(f"⚠️ Alerta: El CV era muy largo ({len(texto_cv)} caracteres). Se ha truncado a {MAX_CARACTERES_CV}.")
+        texto_cv = texto_cv[:MAX_CARACTERES_CV]
+    # --- FIN DE LA MODIFICACIÓN ---
+
     datos_optimizados = analizar_y_optimizar_con_gemini(texto_cv, texto_oferta)
+    
     if datos_optimizados:
         nombre_archivo_salida = "cv_optimizado.docx"
         ruta_completa_salida = os.path.join(output_folder, nombre_archivo_salida)
         crear_docx_optimizado(ruta_completa_salida, datos_optimizados)
+        
         retroalimentacion = datos_optimizados.get('retroalimentacion', [])
-        return nombre_archivo_salida, retroalimentacion
+        nombre_candidato = datos_optimizados.get('cv_optimizado', {}).get('nombre', 'Candidato')
+        
+        return nombre_archivo_salida, retroalimentacion, nombre_candidato
     else:
-        return None, None
+        return None, None, None
