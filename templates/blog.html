@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Blog - CV Pro AI{% endblock %}
+{% block title %}Blog - CV Automatic{% endblock %}
 
 {% block content %}
     <h1>Blog de Carrera</h1>
@@ -8,14 +8,121 @@
     
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_mito_una_pagina') }}">El Mito de "Una Sola Página": ¿Es Realmente un Error Tener 2 Páginas?</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            Todos hemos escuchado la regla de oro: "Tu CV debe caber en una página". Pero, ¿sigue siendo 
+            válida en 2025? Te explicamos por qué los reclutadores prefieren 2 páginas relevantes a 1...
+        </p>
+        <a href="{{ url_for('blog_mito_una_pagina') }}">Leer más →</a>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_huecos_laborales') }}">Cómo Manejar Huecos Laborales (El Truco del Año y Cómo Explicarlo)</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            Un hueco en tu CV se siente como un error fatal, pero no tiene por qué serlo. Te enseñamos el truco 
+            de "solo años" que usan los expertos para pasar el ATS, y cómo explicarlo...
+        </p>
+        <a href="{{ url_for('blog_huecos_laborales') }}">Leer más →</a>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_cv_hibrido') }}">¿No Tienes Experiencia? Cómo Usar un CV Híbrido para Destacar Proyectos</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            "Se necesita experiencia para tener trabajo, pero trabajo para tener experiencia". 
+            Rompemos este ciclo explicándote cómo usar el Formato Híbrido para que tus proyectos y estudios...
+        </p>
+        <a href="{{ url_for('blog_cv_hibrido') }}">Leer más →</a>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_habilidades') }}">Tu Título ya no es Suficiente: La Tendencia de 2025 (Contratación Basada en Habilidades)</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            Grandes empresas están eliminando los requisitos de títulos universitarios. La nueva regla del juego es 
+            la "contratación basada en habilidades". Te explicamos qué significa esto para tu CV...
+        </p>
+        <a href="{{ url_for('blog_habilidades') }}">Leer más →</a>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+    
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_consejos_ednajobs') }}">Tu CV debe ser un Espejo de la Oferta (Consejos ATS de EdnaJobs)</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            ¿Postularse al 60% de la oferta? La experta colombiana EdnaJobs dice que este es un error. 
+            Te explicamos su filosofía de "CV espejo" y por qué es crucial para vencer a los...
+        </p>
+        <a href="{{ url_for('blog_consejos_ednajobs') }}">Leer más →</a>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_errores_descarte_vivian_montoya') }}">"No sigas instrucciones": Errores de novato que te descartan (Consejos de Vivian Montoya)</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            Tu CV pasó el filtro ATS, ¡felicidades! Pero ahora un humano lo ve y te descarta en 10 segundos. 
+            La estratega Vivian Montoya explica los errores de "ansiedad" que...
+        </p>
+        <a href="{{ url_for('blog_errores_descarte_vivian_montoya') }}">Leer más →</a>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_8_grandes') }}">Las "8 Grandes" de Andrew LaCivita: Cómo Cuantificar tus Logros</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            ¿Cómo demuestras tu valor si no eres vendedor? El coach Andrew LaCivita tiene la respuesta. 
+            Te enseñamos su método de las "8 Grandes" para que cualquier profesional pueda...
+        </p>
+        <a href="{{ url_for('blog_8_grandes') }}">Leer más →</a>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_formato_cv') }}">El Formato de CV Ganador para 2025: ¿Cronológico o Funcional?</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            ¿Estás confundido sobre qué formato de CV usar? La elección puede ser la diferencia entre ser visto o ser ignorado. 
+            Analizamos la tendencia de 2025 y por qué los reclutadores prefieren un formato...
+        </p>
+        <a href="{{ url_for('blog_formato_cv') }}">Leer más →</a>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div class="blog-post-summary" style="margin-bottom: 30px;">
+        <h2><a href="{{ url_for('blog_errores_ats') }}">Los 5 Errores Más Comunes que un ATS Detecta en tu CV</a></h2>
+        <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 10 de Noviembre de 2025</p>
+        <p>
+            ¿Sientes que envías tu CV a un "agujero negro"? Más del 75% de los CV son descartados por un robot ATS 
+            antes de que un humano los vea. Aprende a evitar los errores clave...
+        </s
+        <a href="{{ url_for('blog_errores_ats') }}">Leer más →</a>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
     <div class="blog-post-summary">
-        <h2><a href="{{ url_for('article', article_name='como-escribir-un-cv-perfecto') }}">Cómo Escribir un CV Perfecto en 2025</a></h2>
+        <h2><a href="{{ url_for('blog_cv_perfecto') }}">Cómo Escribir un CV Perfecto en 2025</a></h2>
         <p style="color: #777; font-size: 14px; margin-bottom: 10px;">Publicado el 28 de Octubre de 2025</p>
         <p>
             Aprende las claves para que tu CV no solo pase los filtros ATS, sino que también impresione a los 
             reclutadores en el competitivo mercado laboral actual...
         </p>
-        <a href="{{ url_for('article', article_name='como-escribir-un-cv-perfecto') }}">Leer más →</a>
+        <a href="{{ url_for('blog_cv_perfecto') }}">Leer más →</a>
     </div>
-    
-    {% endblock %}
+
+{% endblock %}

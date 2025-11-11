@@ -1,4 +1,4 @@
-# app.py (Versión con límite de tokens para Oferta)
+# app.py (Versión final con robots.txt y sitemap.xml)
 
 import os
 import requests
@@ -36,6 +36,7 @@ def index():
 
 @app.route('/procesar', methods=['POST'])
 def procesar():
+    # ... (Tu código de /procesar permanece igual) ...
     captcha_response = request.form.get('g-recaptcha-response')
     secret_key = app.config['RECAPTCHA_SECRET_KEY']
     
@@ -66,9 +67,7 @@ def procesar():
             return redirect(url_for('index'))
         
         texto_oferta = ""
-        # --- INICIO DE LA MODIFICACIÓN (LÍMITE DE TOKENS OFERTA) ---
-        MAX_CARACTERES_OFERTA = 10000 # Aprox. 3-4 páginas
-        # --- FIN DE LA MODIFICACIÓN ---
+        MAX_CARACTERES_OFERTA = 10000 
 
         if oferta_file and oferta_file.filename != '':
             if not allowed_file(oferta_file.filename):
@@ -88,11 +87,9 @@ def procesar():
                 with open(ruta_oferta, 'r', encoding='utf-8') as f:
                     texto_oferta = f.read()
             
-            # --- INICIO DE LA MODIFICACIÓN (APLICAR EL LÍMITE) ---
             if len(texto_oferta) > MAX_CARACTERES_OFERTA:
                 print(f"⚠️ Alerta: La oferta laboral era muy larga ({len(texto_oferta)} caracteres). Se ha truncado a {MAX_CARACTERES_OFERTA}.")
                 texto_oferta = texto_oferta[:MAX_CARACTERES_OFERTA]
-            # --- FIN DE LA MODIFICACIÓN ---
 
         else:
             flash('Debes subir un archivo para la oferta laboral.')
@@ -166,9 +163,57 @@ def contact():
 def blog():
     return render_template('blog.html')
 
-@app.route('/blog/<article_name>')
-def article(article_name):
-    return render_template('article.html')
+# --- Rutas del Blog ---
+
+@app.route('/blog/como-escribir-un-cv-perfecto')
+def blog_cv_perfecto():
+    return render_template('blog-cv-perfecto.html')
+
+@app.route('/blog/5-errores-comunes-ats')
+def blog_errores_ats():
+    return render_template('blog-errores-ats.html')
+
+@app.route('/blog/formato-cv-ganador-2025')
+def blog_formato_cv():
+    return render_template('blog-formato-cv.html')
+
+@app.route('/blog/las-8-grandes-de-andrew-lacivita')
+def blog_8_grandes():
+    return render_template('blog-8-grandes.html')
+
+@app.route('/blog/errores-descarte-vivian-montoya')
+def blog_errores_descarte_vivian_montoya():
+    return render_template('blog-errores-descarte.html')
+
+@app.route('/blog/consejos-ats-ednajobs')
+def blog_consejos_ednajobs():
+    return render_template('blog-consejos-ednajobs.html')
+
+@app.route('/blog/contratacion-basada-en-habilidades')
+def blog_habilidades():
+    return render_template('blog-habilidades.html')
+
+@app.route('/blog/cv-hibrido-sin-experiencia')
+def blog_cv_hibrido():
+    return render_template('blog-cv-hibrido.html')
+
+@app.route('/blog/como-manejar-huecos-laborales')
+def blog_huecos_laborales():
+    return render_template('blog-huecos-laborales.html')
+
+@app.route('/blog/mito-una-pagina')
+def blog_mito_una_pagina():
+    return render_template('blog-mito-una-pagina.html')
+
+# --- INICIO DE LA MODIFICACIÓN (Rutas para robots.txt y sitemap.xml) ---
+@app.route('/robots.txt')
+def static_from_root_robots():
+    return send_from_directory(app.static_folder, request.path[1:])
+
+@app.route('/sitemap.xml')
+def static_from_root_sitemap():
+    return send_from_directory(app.static_folder, request.path[1:])
+# --- FIN DE LA MODIFICACIÓN ---
 
 if __name__ == '__main__':
     app.run(debug=True)

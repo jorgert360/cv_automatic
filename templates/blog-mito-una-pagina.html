@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+{% block title %}El Mito de la Página Única del CV - CV Automatic{% endblock %}
+
+{% block content %}
+
+<style>
+    .video-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 Relación de aspecto */
+        margin-top: 25px;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
+
+
+    <h1>El Mito de "Una Sola Página": ¿Es Realmente un Error Tener 2 Páginas?</h1>
+    <p style="color: #777; font-size: 14px; margin-top: -10px; margin-bottom: 20px;">
+        Publicado el 10 de Noviembre de 2025
+    </p>
+
+    <p>
+        Seamos brutalmente honestos: todos hemos escuchado la "regla de oro" que nos enseñaron nuestros 
+        padres o nuestro primer profesor de universidad: <strong>"Tu hoja de vida NUNCA debe tener más de una página"</strong>.
+    </p>
+    <p>
+        Este consejo se ha repetido tanto que se ha convertido en una ley no escrita. Y esta "ley" 
+        causa que profesionales con 15 años de experiencia intenten, en un ejercicio de frustración 
+        absoluta, comprimir una década de logros en un espacio imposible.
+    </p>
+    <p>
+        Es hora de decirlo claro: <strong>para la mayoría de los profesionales en 2025, esta regla es un mito.</strong>
+    </p>
+
+    <h2>De Dónde Nace el Mito (y por qué ya no aplica)</h2>
+    <p>
+        Esta regla viene de una era analógica. Cuando los CVs se imprimían y se apilaban físicamente 
+        en el escritorio de un gerente, la brevedad era una virtud. Nadie quería pasar la página.
+    </p>
+    <p>
+        Hoy, tu CV vive en una pantalla. Es un PDF que se "scrollea". Los reclutadores ya no temen 
+        "pasar la página"; de hecho, esperan hacerlo si el candidato es interesante.
+    </p>
+
+    <h2>Qué Dicen los Reclutadores Hoy (La Nueva Realidad)</h2>
+    <p>
+        La nueva regla de 2025 no es la <em>longitud</em>, es la <em>relevancia</em>.
+    </p>
+    <p>
+        Los expertos en carreras son claros:
+    </p>
+    <ul>
+        <li>
+            La mayoría de los profesionales de nivel medio a senior <strong>necesitan una segunda página</strong> para 
+            cubrir adecuadamente su experiencia relevante.
+        </li>
+        <li>
+            El ex-VP de Google, Laszlo Bock, incluso desmintió el mito dentro de Google, sugiriendo 
+            una página por cada 10 años de experiencia.
+        </li>
+        <li>
+            Forzarte a tener una página te lleva a cometer errores graves, como usar una fuente 
+            tamaño 8, eliminar márgenes o, peor aún, <strong>borrar logros impresionantes</strong> 
+            simplemente porque no cabían.
+        </li>
+    </ul>
+
+    <h2>El Video que Desmiente el Mito</h2>
+    <p>
+        ¿Aún no estás convencido? El debate sobre una o dos páginas es uno de los más 
+        comunes en la búsqueda de empleo. Mira este análisis de la coach J.T. O'Donnell, 
+        donde explica exactamente por qué la longitud depende de tu carrera.
+    </p>
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/myfKEibFVTc" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <h2>La Regla de Oro (Actualizada a 2025)</h2>
+    <p>
+        Entonces, ¿cuál es la regla hoy? Es simple y se basa en tu experiencia:
+    </p>
+    <ul>
+        <li>
+            <strong>0-10 años de experiencia (Estudiantes, Nivel Junior):</strong> 
+            Sí, mantente en <strong>una página</strong>. Tienes que ser conciso. Enfócate en proyectos y 
+            habilidades.
+        </li>
+        <li>
+            <strong>10+ años de experiencia (Profesionales Senior, Gerentes):</strong> 
+            <strong>Dos páginas</strong> es el estándar de oro. Tienes una década de logros que demostrar. 
+            No insultes tu carrera comprimiéndola.
+        </li>
+        <li>
+            <strong>¿Tres o más páginas?</strong> Es casi siempre demasiado. Esto solo aplica para 
+            roles muy específicos como académicos, científicos (con listas de publicaciones) o 
+            para currículums federales de EE.UU..
+        </li>
+    </ul>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+
+    <h2>Conclusión: Relevancia sobre Brevedad</h2>
+    <p>
+        El verdadero enemigo de tu CV no es la segunda página. El verdadero enemigo es el <strong>contenido irrelevante</strong>.
+    </p>
+    <p>
+        Un reclutador preferirá mil veces un CV de dos páginas lleno de logros alineados con la 
+        oferta de trabajo, que un CV de una página lleno de "relleno" y tareas genéricas.
+    </p>
+    <p>
+        Aquí es donde <strong>CV Automatic</strong> cambia el juego. Nuestra herramienta no se enfoca en "cortar" 
+        tu CV para que quepa en una página. Se enfoca en <strong>optimizar</strong> tu contenido.
+    </p>
+    <p>
+        La IA analiza la oferta de trabajo y te ayuda a reescribir tus logros para que cada 
+        palabra tenga un propósito. Te ayudamos a crear un CV tan relevante y lleno de impacto que 
+        el reclutador estará feliz de leer la primera página, la segunda y de llamarte para una entrevista.
+    </p>
+    <p>
+        <a href="{{ url_for('index') }}">Deja de preocuparte por la longitud. Preocúpate por el impacto. 
+        Prueba CV Automatic aquí.</a>
+    </f>
+
+{% endblock %}
