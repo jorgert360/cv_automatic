@@ -1,4 +1,4 @@
-# app.py (Versión final con robots.txt y sitemap.xml)
+# app.py (Versión final con ruta de almacenamiento de Render)
 
 import os
 import requests
@@ -12,8 +12,10 @@ load_dotenv()
 # -----------------------------------------------------------
 
 
-# --- CONFIGURACIÓN DE RUTAS (ADAPTADA PARA RAILWAY) ---
-VOLUME_PATH = "/data"
+# --- CONFIGURACIÓN DE RUTAS (ADAPTADA PARA RENDER) ---
+# Usamos /tmp, que es un directorio temporal en el que Render SÍ permite escribir
+# Los archivos aquí son "efímeros" (se borran en cada reinicio), lo cual es bueno para la privacidad.
+VOLUME_PATH = "/tmp"  # <-- ESTE ES EL CAMBIO
 UPLOAD_FOLDER = os.path.join(VOLUME_PATH, 'uploads')
 OUTPUT_FOLDER = os.path.join(VOLUME_PATH, 'outputs')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'docx'}
@@ -36,7 +38,7 @@ def index():
 
 @app.route('/procesar', methods=['POST'])
 def procesar():
-    # ... (Tu código de /procesar permanece igual) ...
+    # ... (El resto del código no cambia) ...
     captcha_response = request.form.get('g-recaptcha-response')
     secret_key = app.config['RECAPTCHA_SECRET_KEY']
     
@@ -205,7 +207,6 @@ def blog_huecos_laborales():
 def blog_mito_una_pagina():
     return render_template('blog-mito-una-pagina.html')
 
-# --- INICIO DE LA MODIFICACIÓN (Rutas para robots.txt y sitemap.xml) ---
 @app.route('/robots.txt')
 def static_from_root_robots():
     return send_from_directory(app.static_folder, request.path[1:])
@@ -213,7 +214,6 @@ def static_from_root_robots():
 @app.route('/sitemap.xml')
 def static_from_root_sitemap():
     return send_from_directory(app.static_folder, request.path[1:])
-# --- FIN DE LA MODIFICACIÓN ---
 
 if __name__ == '__main__':
     app.run(debug=True)
