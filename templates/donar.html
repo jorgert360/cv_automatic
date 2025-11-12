@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoya CV Automatic</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7894775799830476"
+         crossorigin="anonymous"></script>
     <style>
-        /* (El CSS de donar.html permanece igual...) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #1c2541, #3a506b);
             display: flex;
-            flex-direction: column; /* <-- Corregido para el footer */
+            flex-direction: column; 
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 40px 20px;
             box-sizing: border-box;
         }
+
         .card {
             background-color: white;
             padding: 40px 50px;
@@ -30,9 +34,11 @@
             gap: 40px;
             align-items: center;
         }
+        
         .text-content {
             text-align: center;
         }
+
         .main-image {
             width: 150px;
             height: 150px;
@@ -41,6 +47,7 @@
             margin: 0 auto 20px auto;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
+        
         h1 {
             color: #1c2541;
             font-weight: 700;
@@ -48,6 +55,7 @@
             margin-bottom: 10px;
             margin-top: 0;
         }
+
         .subtitle {
             color: #5b6a7e;
             line-height: 1.6;
@@ -55,12 +63,14 @@
             margin-bottom: 25px;
             text-align: left;
         }
+        
         .qr-code {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
+
         .btn-back {
             display: inline-block;
             margin-top: 20px;
@@ -68,6 +78,7 @@
             color: #5e7ce2;
             font-weight: 600;
         }
+
         .footer {
             text-align: center;
             color: white;
@@ -86,6 +97,7 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        
         @media (max-width: 768px) {
             .card { grid-template-columns: 1fr; }
             .text-content { text-align: center; }
@@ -98,7 +110,9 @@
     <div class="card">
         <div class="text-content">
             <img src="{{ url_for('static', filename='reclutadora_feliz.jpg') }}" alt="¡Gracias por tu apoyo!" class="main-image">
+
             <h1>💜 ¡Gracias por tu Apoyo!</h1>
+            
             <p class="subtitle">
                 Tu generosidad es el motor que impulsa este proyecto. Cada aporte me ayuda a mantener esta herramienta tecnológica, la cual ha facilitado a muchas personas alcanzar ese trabajo soñado.
             </p>
@@ -107,6 +121,7 @@
             </p>
             <a href="/" class="btn-back">← Volver al inicio</a>
         </div>
+
         <div class="qr-content">
             <img src="{{ url_for('static', filename='codigo_qr.jpg') }}" alt="Código QR para donación en Nequi" class="qr-code">
         </div>

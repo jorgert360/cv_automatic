@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Automatic - Optimizador Inteligente de CV</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7894775799830476"
+         crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         /* (Todo el CSS de index.html permanece igual...) */
@@ -95,7 +98,7 @@
 <body>
     <div id="form-container" class="card">
         <div class="header-section">
-            <div class="header-image"><img src="{{ url_for('static', filename='reclutadora.jpg') }}" alt="Reclutadora Profesional" class="main-image"></div>
+            <div class="header-image"><img src="/static/reclutadora.jpg" alt="Reclutadora Profesional" class="main-image"></div>
             <div class="header-text"><h1>No permitas que tu CV lo descarte un ATS</h1><p>Transforma tu CV y supera los filtros ATS con IA. Aumenta tu afinidad con la oferta laboral hasta el 100 % y consigue la entrevista que cambiará tu vida profesional.</p></div>
         </div>
         {% with messages = get_flashed_messages() %}
@@ -111,12 +114,12 @@
                 <input type="checkbox" id="habeas_data" name="habeas_data" required>
                 <label for="habeas_data">
                     He leído y acepto la 
-                    <a href="{{ url_for('privacy') }}" target="_blank">Política de Privacidad</a> 
+                    <a href="/privacy" target="_blank">Política de Privacidad</a> 
                     y autorizo el tratamiento de mis datos personales.
                 </label>
             </div>
 
-            <div class="g-recaptcha" data-sitekey="{{ site_key }}" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
+            <div class="g-recaptcha" data-sitekey="6LeaT-QrAAAAAI7UsVzMhuBwmNAzF0ejGaafgEA8" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
             <button type="submit" id="submit-button" disabled>Analizar y Optimizar mi CV</button>
         </form>
     </div>
@@ -126,10 +129,10 @@
 
     <footer class="footer">
         <p>
-            <a href="{{ url_for('blog') }}">Blog</a> |
-            <a href="{{ url_for('about') }}">Sobre Nosotros</a> |
-            <a href="{{ url_for('contact') }}">Contacto</a> |
-            <a href="{{ url_for('privacy') }}">Política de Privacidad</a>
+            <a href="/blog">Blog</a> |
+            <a href="/about">Sobre Nosotros</a> |
+            <a href="/contact">Contacto</a> |
+            <a href="/privacy">Política de Privacidad</a>
         </p>
     </footer>
 
