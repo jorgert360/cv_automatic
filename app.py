@@ -1,10 +1,15 @@
-# app.py (Versión final con ruta de almacenamiento de Render)
+# app.py (Versión con manejo de error de Límite de Tarifa)
 
 import os
 import requests
 from flask import Flask, render_template, request, send_from_directory, flash, redirect, url_for, session
 from werkzeug.utils import secure_filename
-from logic import procesar_cv_completo, extraer_texto_pdf, extraer_texto_docx
+# --- INICIO DE LA MODIFICACIÓN ---
+from logic import (
+    procesar_cv_completo, extraer_texto_pdf, 
+    extraer_texto_docx, RateLimitError  # <-- 1. Importar el nuevo error
+)
+# --- FIN DE LA MODIFICACIÓN ---
 
 # --- Carga las variables de entorno desde el archivo .env ---
 from dotenv import load_dotenv
@@ -13,9 +18,7 @@ load_dotenv()
 
 
 # --- CONFIGURACIÓN DE RUTAS (ADAPTADA PARA RENDER) ---
-# Usamos /tmp, que es un directorio temporal en el que Render SÍ permite escribir
-# Los archivos aquí son "efímeros" (se borran en cada reinicio), lo cual es bueno para la privacidad.
-VOLUME_PATH = "/tmp"  # <-- ESTE ES EL CAMBIO
+VOLUME_PATH = "/tmp"  # <-- Usando la carpeta de Render
 UPLOAD_FOLDER = os.path.join(VOLUME_PATH, 'uploads')
 OUTPUT_FOLDER = os.path.join(VOLUME_PATH, 'outputs')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'docx'}
@@ -38,7 +41,6 @@ def index():
 
 @app.route('/procesar', methods=['POST'])
 def procesar():
-    # ... (El resto del código no cambia) ...
     captcha_response = request.form.get('g-recaptcha-response')
     secret_key = app.config['RECAPTCHA_SECRET_KEY']
     
@@ -104,6 +106,8 @@ def procesar():
             ruta_cv = os.path.join(app.config['UPLOAD_FOLDER'], cv_filename)
             cv_file.save(ruta_cv)
             
+            # --- INICIO DE LA MODIFICACIÓN (Atrapar Error) ---
+            # 2. Envolvemos la llamada a proceso en un try/except
             try:
                 (
                     nombre_archivo_resultado, 
@@ -119,9 +123,17 @@ def procesar():
                 else:
                     flash('Ocurrió un error durante el procesamiento con la IA.')
                     return redirect(url_for('index'))
+            
+            except RateLimitError:
+                # 3. ¡Atrapamos el error de límite de tarifa!
+                flash('Nuestro servicio de IA está experimentando un alto tráfico en este momento. Por favor, inténtelo de nuevo en uno o dos minutos.')
+                return redirect(url_for('index'))
+            
             except Exception as e:
+                # Atrapamos todos los demás errores (como el 500 que vimos antes)
                 flash(f'Ocurrió un error inesperado: {e}')
                 return redirect(url_for('index'))
+            # --- FIN DE LA MODIFICACIÓN ---
         else:
             flash('Archivo de CV no permitido. Sube un .pdf.')
             return redirect(url_for('index'))

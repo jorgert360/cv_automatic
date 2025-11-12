@@ -1,4 +1,4 @@
-# logic.py (Versión final con prompt de "Fortalezas Primero")
+# logic.py (Versión con manejo de error de Límite de Tarifa)
 
 import os
 import re
@@ -8,6 +8,13 @@ from pdfminer.high_level import extract_text
 from docx import Document
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from google.api_core import exceptions as google_exceptions # <-- 1. IMPORTAR EXCEPCIONES DE GOOGLE
+
+# --- INICIO DE LA MODIFICACIÓN (Error Personalizado) ---
+# 2. Creamos un error personalizado que nuestra app pueda entender
+class RateLimitError(Exception):
+    pass
+# --- FIN DE LA MODIFICACIÓN ---
 
 def limpiar_texto_para_xml(texto):
     if texto is None: return ""
@@ -37,12 +44,9 @@ def extraer_texto_docx(ruta_docx):
 def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
     print("🤖 Analizando y optimizando el CV con IA...")
     
-    # Usamos el modelo que sabemos que funciona con tu API/biblioteca
     model = genai.GenerativeModel("models/gemini-2.5-pro")
-    
     print(f"DEBUG: Intentando usar el modelo: {model.model_name}")
 
-    # --- INICIO DE LA MODIFICACIÓN (PROMPT MEJORADO) ---
     prompt = f"""
     Actúa como una coach de carrera de élite y experta en reclutamiento C-Suite, alineada con las 
     filosofías de expertos como Andrew LaCivita y EdnaJobs. Tu objetivo es transformar un CV 
@@ -60,8 +64,7 @@ def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
             que actúe como un "gancho" y sea un "espejo" de la OFERTA ESPECÍFICA.
         b.  **Experiencia Profesional:** Adapta los logros. Reemplaza el lenguaje pasivo 
             (ej: "responsable de") por **verbos de acción potentes**. Donde sea posible, 
-            **CUANTIFICA** el impacto usando el método de las "8 Grandes" (ej: costos 
-            reducidos, eficiencia de procesos, etc.).
+            **CUANTIFICA** el impacto usando el método de las "8 Grandes".
         c.  **Coherencia ATS:** Asegúrate de que las palabras clave críticas de la OFERTA DE TRABAJO 
             se reflejen en el perfil y la experiencia.
 
@@ -69,12 +72,9 @@ def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
         dos partes para el candidato.
         a.  **Paso 1: Fortalezas Clave (El primer ítem de la lista):** Comienza la retroalimentación 
             con un párrafo positivo y alentador. Identifica las 2-3 **fortalezas y habilidades** principales del candidato que SÍ se alinean perfectamente con la oferta de trabajo.
-            (Ej: "**Tus Fortalezas Clave:** Jorge, tu perfil es muy sólido para este rol. 
-            Tu experiencia de 5 años en logística y tu manejo avanzado de Python son una 
-            coincidencia directa con lo que la empresa está buscando.")
         b.  **Paso 2: Consejos Accionables (Los siguientes ítems):** Después del inicio positivo, 
             continúa con 3-4 consejos accionables (Análisis de Brecha Crítica, 
-            Oportunidad de Impacto, Movimiento Estratégico) como ya lo hacías.
+            Oportunidad de Impacto, Movimiento Estratégico).
 
     RESPUESTA: Devuelve tu respuesta únicamente en formato JSON. Asegúrate de que los campos que 
     son listas (como experiencia_profesional, educacion, idiomas, retroalimentacion) sean siempre 
@@ -97,16 +97,26 @@ def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
       ]
     }}
     """
-    # --- FIN DE LA MODIFICACIÓN ---
     
+    # --- INICIO DE LA MODIFICACIÓN (Atrapar Error 429) ---
+    # 3. Añadimos un try/except más específico
     try:
         response = model.generate_content(prompt)
         if not response.parts:
             raise RuntimeError("La respuesta de la IA fue bloqueada, posiblemente por políticas de seguridad.")
         json_text = response.text.strip().replace("```json", "").replace("```", "")
         return json.loads(json_text)
+    
+    except google_exceptions.ResourceExhausted as e:
+        # ¡Este es el error de "demasiadas solicitudes" (429)!
+        print(f"⚠️ Error de Límite de Tasa de API de Gemini (429): {e}")
+        # Lanzamos nuestro error personalizado para que app.py lo atrape
+        raise RateLimitError("API de Gemini sobrecargada. Por favor, inténtelo de nuevo en un minuto.")
+    
     except Exception as e:
+        # Errores generales (bloqueo de seguridad, etc.)
         raise RuntimeError(f"Error al procesar la respuesta de Gemini: {e}")
+    # --- FIN DE LA MODIFICACIÓN ---
 
 def crear_docx_optimizado(ruta_completa_salida, data):
     # ... (Esta función permanece exactamente igual) ...
