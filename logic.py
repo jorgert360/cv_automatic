@@ -1,4 +1,4 @@
-# logic.py (Versión con límite de tokens para CV)
+# logic.py (Versión final con prompt de "Fortalezas Primero")
 
 import os
 import re
@@ -37,33 +37,68 @@ def extraer_texto_docx(ruta_docx):
 def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
     print("🤖 Analizando y optimizando el CV con IA...")
     
-    # Modelo que sabemos que funciona para tu API/biblioteca
+    # Usamos el modelo que sabemos que funciona con tu API/biblioteca
     model = genai.GenerativeModel("models/gemini-2.5-pro")
     
     print(f"DEBUG: Intentando usar el modelo: {model.model_name}")
 
+    # --- INICIO DE LA MODIFICACIÓN (PROMPT MEJORADO) ---
     prompt = f"""
-    Actúa como una experta en reclutamiento de alta gerencia y coach de carrera.
-    Analiza el CV y la oferta de trabajo.
-    TAREAS:
-    1.  **Optimiza el CV:** Reestructura el contenido del CV en un formato JSON. Re-escribe el "Perfil Profesional". Adapta los logros en la "Experiencia Profesional" usando verbos de acción.
-    2.  **Genera Retroalimentación Estratégica:** Crea un análisis para el candidato con 3-4 consejos accionables.
+    Actúa como una coach de carrera de élite y experta en reclutamiento C-Suite, alineada con las 
+    filosofías de expertos como Andrew LaCivita y EdnaJobs. Tu objetivo es transformar un CV 
+    para que no solo supere el ATS, sino que impresione al reclutador humano. Tu enfoque es la 
+    "contratación basada en habilidades" y la "cuantificación del impacto".
+
     CV ORIGINAL: --- {texto_cv} ---
     OFERTA DE TRABAJO: --- {texto_oferta} ---
-    RESPUESTA: Devuelve tu respuesta únicamente en formato JSON. Asegúrate de que los campos que son listas (como experiencia_profesional, educacion, idiomas, retroalimentacion) sean siempre listas, incluso si están vacías ([]), nunca nulos. La estructura debe ser:
+
+    TAREAS:
+
+    1.  **Optimiza el CV (Formato JSON):** (Esta tarea no cambia) Reestructura el contenido del CV en el formato 
+        JSON de salida.
+        a.  **Perfil Profesional:** Re-escribe un "Perfil Profesional" de alto impacto (3-4 líneas) 
+            que actúe como un "gancho" y sea un "espejo" de la OFERTA ESPECÍFICA.
+        b.  **Experiencia Profesional:** Adapta los logros. Reemplaza el lenguaje pasivo 
+            (ej: "responsable de") por **verbos de acción potentes**. Donde sea posible, 
+            **CUANTIFICA** el impacto usando el método de las "8 Grandes" (ej: costos 
+            reducidos, eficiencia de procesos, etc.).
+        c.  **Coherencia ATS:** Asegúrate de que las palabras clave críticas de la OFERTA DE TRABAJO 
+            se reflejen en el perfil y la experiencia.
+
+    2.  **Genera Retroalimentación Estratégica (Lista de strings):** Crea un análisis en 
+        dos partes para el candidato.
+        a.  **Paso 1: Fortalezas Clave (El primer ítem de la lista):** Comienza la retroalimentación 
+            con un párrafo positivo y alentador. Identifica las 2-3 **fortalezas y habilidades** principales del candidato que SÍ se alinean perfectamente con la oferta de trabajo.
+            (Ej: "**Tus Fortalezas Clave:** Jorge, tu perfil es muy sólido para este rol. 
+            Tu experiencia de 5 años en logística y tu manejo avanzado de Python son una 
+            coincidencia directa con lo que la empresa está buscando.")
+        b.  **Paso 2: Consejos Accionables (Los siguientes ítems):** Después del inicio positivo, 
+            continúa con 3-4 consejos accionables (Análisis de Brecha Crítica, 
+            Oportunidad de Impacto, Movimiento Estratégico) como ya lo hacías.
+
+    RESPUESTA: Devuelve tu respuesta únicamente en formato JSON. Asegúrate de que los campos que 
+    son listas (como experiencia_profesional, educacion, idiomas, retroalimentacion) sean siempre 
+    listas, incluso si están vacías ([]), nunca nulos. La estructura debe ser:
     {{
       "cv_optimizado": {{
         "nombre": "Nombre Completo",
         "contacto": {{ "email": "", "telefono": "", "linkedin": "", "ciudad": "" }},
         "perfil_profesional": "Perfil reescrito.",
-        "experiencia_profesional": [ {{ "cargo": "", "empresa": "", "ciudad": "", "periodo": "", "logros": ["Logro 1."] }} ],
+        "experiencia_profesional": [ {{ "cargo": "", "empresa": "", "ciudad": "", "periodo": "", "logros": ["Logro 1.", "Logro 2."] }} ],
         "educacion": [ {{ "titulo": "", "institucion": "", "periodo": "" }} ],
         "habilidades": {{ "tecnicas": ["Habilidad 1"], "competencias": ["Competencia 1"] }},
         "idiomas": [ {{ "idioma": "Idioma", "nivel": "Nivel" }} ]
       }},
-      "retroalimentacion": ["Consejo 1."]
+      "retroalimentacion": [
+        "**Tus Fortalezas Clave:** Eres un candidato fuerte para este rol gracias a tu experiencia en [Habilidad 1] y [Habilidad 2].",
+        "**Análisis de Brecha Crítica:** Consejo 1.",
+        "**Oportunidad de Impacto:** Consejo 2.",
+        "**Movimiento Estratégico:** Consejo 3."
+      ]
     }}
     """
+    # --- FIN DE LA MODIFICACIÓN ---
+    
     try:
         response = model.generate_content(prompt)
         if not response.parts:
@@ -74,6 +109,7 @@ def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
         raise RuntimeError(f"Error al procesar la respuesta de Gemini: {e}")
 
 def crear_docx_optimizado(ruta_completa_salida, data):
+    # ... (Esta función permanece exactamente igual) ...
     print(f"🎨 Creando documento Word en: {ruta_completa_salida}")
     if not data or 'cv_optimizado' not in data:
         raise ValueError("No se recibieron datos válidos para crear el documento.")
@@ -133,13 +169,11 @@ def procesar_cv_completo(ruta_pdf_cv, texto_oferta, output_folder):
     configurar_gemini()
     texto_cv = extraer_texto_pdf(ruta_pdf_cv)
 
-    # --- INICIO DE LA MODIFICACIÓN (LÍMITE DE TOKENS CV) ---
-    MAX_CARACTERES_CV = 15000 # Aprox. 5 páginas
+    MAX_CARACTERES_CV = 15000 
     
     if len(texto_cv) > MAX_CARACTERES_CV:
         print(f"⚠️ Alerta: El CV era muy largo ({len(texto_cv)} caracteres). Se ha truncado a {MAX_CARACTERES_CV}.")
         texto_cv = texto_cv[:MAX_CARACTERES_CV]
-    # --- FIN DE LA MODIFICACIÓN ---
 
     datos_optimizados = analizar_y_optimizar_con_gemini(texto_cv, texto_oferta)
     
