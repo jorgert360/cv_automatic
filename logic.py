@@ -44,7 +44,7 @@ def extraer_texto_docx(ruta_docx):
 def analizar_y_optimizar_con_gemini(texto_cv, texto_oferta):
     print("🤖 Analizando y optimizando el CV con IA...")
     
-    model = genai.GenerativeModel("models/gemini-2.5-pro")
+    model = genai.GenerativeModel("models/gemini-1.5-flash")
     print(f"DEBUG: Intentando usar el modelo: {model.model_name}")
 
     prompt = f"""
