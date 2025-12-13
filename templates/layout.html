@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CV Automatic{% endblock %}</title>
-    
+
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='logo.png') }}">
-    
-    
+
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7894775799830476"
-         crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7f9; 
-            color: #34495e; 
+            background-color: #f4f7f9;
+            color: #34495e;
             line-height: 1.7;
             margin: 0;
             padding: 0;
@@ -28,23 +29,27 @@
 
         /* --- Barra de Navegación (Header) --- */
         .navbar {
-            background-color: #525f7f; /* Color azul-grisáceo */
+            background-color: #525f7f;
+            /* Color azul-grisáceo */
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .navbar .logo {
             font-size: 24px;
             font-weight: 700;
             color: white;
             text-decoration: none;
         }
+
         .navbar .nav-links {
             display: flex;
             gap: 25px;
         }
+
         .navbar .nav-links a {
             color: white;
             text-decoration: none;
@@ -52,9 +57,21 @@
             opacity: 0.8;
             transition: opacity 0.2s;
         }
+
         .navbar .nav-links a:hover {
             opacity: 1;
             text-decoration: underline;
+        }
+
+        .navbar .nav-links a.blog-link {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 8px;
+            opacity: 1;
+        }
+
+        .navbar .nav-links a.blog-link:hover {
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         /* --- Tarjeta de Contenido Principal --- */
@@ -62,33 +79,42 @@
             background-color: white;
             padding: 40px 50px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             max-width: 900px;
             width: 90%;
-            margin: 40px auto; /* Centrado */
-            flex-grow: 1; /* Empuja el footer hacia abajo */
+            margin: 40px auto;
+            /* Centrado */
+            flex-grow: 1;
+            /* Empuja el footer hacia abajo */
         }
-        
+
         /* --- Estilos de Texto --- */
-        .content-card h1, .content-card h2 {
-            color: #1c2541; /* Azul oscuro para títulos */
+        .content-card h1,
+        .content-card h2 {
+            color: #1c2541;
+            /* Azul oscuro para títulos */
             font-weight: 700;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 10px;
             margin-top: 0;
         }
+
         .content-card p {
             font-size: 16px;
             margin-bottom: 20px;
         }
+
         .content-card a {
-            color: #5e7ce2; /* Azul brillante para enlaces */
+            color: #5e7ce2;
+            /* Azul brillante para enlaces */
             font-weight: 600;
             text-decoration: none;
         }
+
         .content-card a:hover {
             text-decoration: underline;
         }
+
         .content-card ul {
             padding-left: 20px;
         }
@@ -102,28 +128,39 @@
             width: 100%;
             box-sizing: border-box;
         }
+
         .footer a {
             color: #5b6a7e;
             text-decoration: none;
             margin: 0 10px;
         }
+
         .footer a:hover {
             text-decoration: underline;
         }
 
         /* Para dispositivos móviles */
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 15px; }
-            .content-card { padding: 30px 25px; width: 95%; margin-top: 20px; }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .content-card {
+                padding: 30px 25px;
+                width: 95%;
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar">
         <a href="{{ url_for('index') }}" class="logo">CV Automatic</a>
         <div class="nav-links">
-            <a href="{{ url_for('blog') }}">Blog</a>
+            <a href="{{ url_for('blog') }}" class="blog-link">📚 Blog</a>
             <a href="{{ url_for('about') }}">Sobre Nosotros</a>
             <a href="{{ url_for('contact') }}">Contacto</a>
             <a href="{{ url_for('privacy') }}">Privacidad</a>
@@ -144,4 +181,5 @@
     </footer>
 
 </body>
+
 </html>
