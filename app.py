@@ -219,13 +219,18 @@ def blog_huecos_laborales():
 def blog_mito_una_pagina():
     return render_template('blog-mito-una-pagina.html')
 
+# --- Rutas de SEO Técnico (ads.txt, robots.txt, sitemap.xml) ---
 @app.route('/robots.txt')
-def static_from_root_robots():
-    return send_from_directory(app.static_folder, request.path[1:])
+def robots_txt():
+    return send_from_directory(app.static_folder, 'robots.txt', mimetype='text/plain')
 
 @app.route('/sitemap.xml')
-def static_from_root_sitemap():
-    return send_from_directory(app.static_folder, request.path[1:])
+def sitemap_xml():
+    return send_from_directory(app.static_folder, 'sitemap.xml', mimetype='application/xml')
+
+@app.route('/ads.txt')
+def ads_txt():
+    return send_from_directory(app.static_folder, 'ads.txt', mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(debug=True)

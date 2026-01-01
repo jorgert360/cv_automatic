@@ -1,8 +1,13 @@
-# Archivo robots.txt para CV Automatic
-User-agent: *
-Disallow: /uploads/
-Disallow: /outputs/
-Disallow: /resultado
+# Robots.txt para CV Automatic
+# https://cvautomatic.online
 
-# Le dice a Google dónde encontrar el mapa de tu sitio
+User-agent: *
+Allow: /
+
+# Bloquear rutas internas que no deben indexarse
+Disallow: /procesar
+Disallow: /resultado
+Disallow: /descargar/
+
+# Ubicación del Sitemap
 Sitemap: https://cvautomatic.online/sitemap.xml
